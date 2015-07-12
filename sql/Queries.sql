@@ -14,7 +14,7 @@ create temporary table subdecks (matchid int, decka int, deckb int);
 insert into tid
 select
 	tournament.id
-from tournament
+from Tournament
 where 1 = 1
 and datediff(now(), startdate) <= 365
 and finished = 1
@@ -28,7 +28,7 @@ insert into mid
 select
 	t.tournamentid,
 	m.id
-from matches m
+from Matches m
 join tid t
 	on t.tournamentid = m.tournamentid
 where 1 = 1
@@ -40,11 +40,11 @@ insert into dpid
 select
 	mid.tournamentid, m.id, d.id, p.id
 from mid
-join matches m
+join Matches m
 	on m.id = mid.matchid
-join decks d
+join Decks d
 	on d.id = m.deckida
-join players p
+join Players p
 	on p.id = m.playerida
 where d.name != 'team unified standard';
 
@@ -52,11 +52,11 @@ insert into dpid
 select
 	mid.tournamentid, m.id, d.id, p.id
 from mid
-join matches m
+join Matches m
 	on m.id = mid.matchid
-join decks d
+join Decks d
 	on d.id = m.deckidb
-join players p
+join Players p
 	on p.id = m.playeridb
 where d.name != 'team unified standard';
 
@@ -67,7 +67,7 @@ select DISTINCT
 	SUBSTRING_INDEX(p.name,' ',1),
 	SUBSTRING_INDEX(p.name,' ',-1)
 from dpid base
-join mtgcoverage_archive.players p
+join mtgcoverage_archive.Players p
 	on base.playerid = p.id
 where 1 = 1;
 
@@ -488,11 +488,11 @@ select
 	end as translated_deck_color,
 	d.name
 from dpid base
-join mtgcoverage_archive.decks d
+join mtgcoverage_archive.Decks d
 	on d.id = base.deckid
-join mtgcoverage_archive.matches m
+join mtgcoverage_archive.Matches m
 	on m.id = base.matchid
-join mtgcoverage_archive.players p
+join mtgcoverage_archive.Players p
 	on p.id = base.playerid
 left join coverage.coverage_player cp
 	on cp.first_name = SUBSTRING_INDEX(p.name,' ',1)
@@ -574,9 +574,9 @@ SELECT DISTINCT
 	subdecks.decka,
 	subdecks.deckb
 FROM stageground base
-JOIN mtgcoverage_archive.matches m
+JOIN mtgcoverage_archive.Matches m
 	ON m.id = base.matchid
-JOIN mtgcoverage_archive.tournament t
+JOIN mtgcoverage_archive.Tournament t
 	ON t.id = base.tournamentid
 JOIN subdecks
 	ON subdecks.matchid = base.matchid
