@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css">
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <title>MTGRewind</title>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>{% for event in events %} {{ event.event_type.name }}: {{ event.location }} - {{ event.start_date }}{% endfor %}</h1>
+    <hr />
+    {% for match in matches %}
+        <div class="event">
+        <h2><a href="{{ match.vod_url }}">Link</a></h2>
+        <h2>Round: {{ match.round_number|default_if_none:match.top8 }}   </h2>
+        <h3>{{ match.first_deck.player.first_name }} {{ match.first_deck.player.last_name }} : {{ match.first_deck.color.name }} {{ match.first_deck.archetype.name }}</h3>
+        <h3>{{ match.second_deck.player.first_name }} {{ match.second_deck.player.last_name }} : {{ match.second_deck.color.name }} {{ match.second_deck.archetype.name }}</h3>
+        </div>
+        <hr />
+    {% endfor %}
+</div>
+
+</body>
+
+</html>

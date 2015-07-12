@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="coverage/style.css" />
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <title>MTGRewind</title>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>MTGRewind</h1>
+    <hr />
+    {% for event in events %}
+        <div class="event">
+        <h2>{{ event.location }}</h2>
+        <h3>Tournament on {{ event.start_date }} by {{ event.organizer.name }}</h3>
+        <p>{{ event.format.name }} </p>
+        <p><a href="{{ event.id }}">LINK</a></p>
+        </div>
+        <hr />
+    {% endfor %}
+</div>
+
+</body>
+
+</html>
