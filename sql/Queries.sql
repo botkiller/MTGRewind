@@ -13,7 +13,7 @@ create temporary table subdecks (matchid int, decka int, deckb int);
 
 insert into tid
 select
-	tournament.id
+	Tournament.id
 from Tournament
 where 1 = 1
 and datediff(now(), startdate) <= 365
@@ -200,7 +200,7 @@ select DISTINCT
 		when d.name like '%hatebears%' then 'Hatebears'
 	end as translated_deck_archetype
 from dpid base
-join mtgcoverage_archive.decks d
+join mtgcoverage_archive.Decks d
 	on d.id = base.deckid;
 
 
@@ -534,7 +534,7 @@ END,
 	15,
 	f.id
 from stageground base
-join mtgcoverage_archive.tournament t
+join mtgcoverage_archive.Tournament t
 	on t.id = base.tournamentid
 left join coverage.coverage_format f
 	on f.name = t.format;
