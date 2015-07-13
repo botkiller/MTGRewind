@@ -38,6 +38,10 @@ class deck(models.Model):
     format = models.ForeignKey('coverage.format')
     color = models.ForeignKey('coverage.color', blank=True, null=True)
 
+
+    def __unicode__(self):
+        return "testing"
+
 class format(models.Model):
     name = models.CharField(max_length=100)
     format_type = models.ForeignKey('coverage.format_type')
