@@ -42,6 +42,8 @@ class format(models.Model):
     name = models.CharField(max_length=100)
     format_type = models.ForeignKey('coverage.format_type')
     epoch = models.ForeignKey('coverage.epoch', blank=True, null=True)
+    def __unicode__(self):
+        return self.name
 
 class organizer(models.Model):
     name = models.CharField(max_length=100)

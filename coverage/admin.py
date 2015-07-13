@@ -6,6 +6,6 @@ class eventAdmin(admin.ModelAdmin):
     list_display = ['get_event_type', 'location', 'start_date']
     def get_event_type(self, obj):
         return obj.event_type.name
-    get_event_type.short_description = "eventtype"
+    get_event_type.short_description = "Event Type"
 
 admin.site.register(event, eventAdmin)
