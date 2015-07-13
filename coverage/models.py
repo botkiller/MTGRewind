@@ -37,9 +37,7 @@ class deck(models.Model):
     player = models.ForeignKey('coverage.player')
     format = models.ForeignKey('coverage.format')
     color = models.ForeignKey('coverage.color', blank=True, null=True)
-
-
-    def __unicode__(self):
+    def __unicode__(event):
         return unicode(event.location)
 
 class format(models.Model):
