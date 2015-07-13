@@ -10,6 +10,8 @@ class event(models.Model):
     format = models.ForeignKey('coverage.format')
     winning_deck = models.ForeignKey('coverage.deck', blank=True, null=True)
     details_url = models.CharField(max_length=255, blank=True, null=True)
+    def __unicode__(self):
+        return self.location
 
 class match(models.Model):
     event = models.ForeignKey('coverage.event')
@@ -38,7 +40,7 @@ class deck(models.Model):
     format = models.ForeignKey('coverage.format')
     color = models.ForeignKey('coverage.color', blank=True, null=True)
     def __unicode__(self):
-        return self.name
+        return '%s %s' % (self.winning_deck.location, self.name)
 
 class format(models.Model):
     name = models.CharField(max_length=100)
