@@ -1,5 +1,5 @@
 from django.contrib import admin
-from coverage.models import event
+import coverage.models
 
 # Register your models here.
 class eventAdmin(admin.ModelAdmin):
