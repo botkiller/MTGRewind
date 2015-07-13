@@ -549,6 +549,29 @@ SELECT DISTINCT
 	base.color_id
 FROM stageground base;
 
+
+#INSERT INTO coverage.coverage_deck
+#  (name, archetype_id, player_id, format_id, color_id, event_id)
+#SELECT DISTINCT
+#	base.deckname,
+#	base.archetype_id,
+#	base.player_id,
+#	base.format_id,
+#	base.color_id, 
+#	e.id
+#FROM stageground base
+#LEFT JOIN Tournament t 
+#	ON t.id = base.tournamentid
+#LEFT JOIN coverage.coverage_event e 
+#	ON e.location = SUBSTRING_INDEX(t.location,',',1)
+#	AND t.startdate = e.start_date
+#LEFT JOIN coverage.coverage_format f 
+#	ON f.id = e.id
+#	AND f.name = t.format
+#	;
+
+
+
 INSERT INTO subdecks
 	(matchid, decka, deckb)
 SELECT DISTINCT
