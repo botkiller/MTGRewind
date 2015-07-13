@@ -40,7 +40,7 @@ class deck(models.Model):
 
 
     def __unicode__(self):
-        return "testing"
+        return player.first_name
 
 class format(models.Model):
     name = models.CharField(max_length=100)
