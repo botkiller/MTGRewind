@@ -47,6 +47,8 @@ class format(models.Model):
 
 class organizer(models.Model):
     name = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.name
 
 class player(models.Model):
     first_name = models.CharField(max_length=100)
@@ -71,6 +73,8 @@ class archetype(models.Model):
 
 class event_type(models.Model):
     name = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.name
 
 class color(models.Model):
     name = models.CharField(max_length=100)
