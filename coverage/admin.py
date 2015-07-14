@@ -4,9 +4,26 @@ from coverage.models import event, match, game, deck, format, organizer, player,
 # Register your models here.
 class eventAdmin(admin.ModelAdmin):
     list_display = ['get_event_type', 'location', 'start_date']
+    inlines = (DeckInline,)
+
+    def get_form(self, request, obj=None, **kwargs):
+        request._obj_ = obj
+        return super(eventAdmin, self).get_form(request, obj, **kwargs)
     def get_event_type(self, obj):
         return obj.event_type.name
     get_event_type.short_description = "Event Type"
+
+class DeckInline(admin.TabularInline):
+    model = deck
+    def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
+        field = super(DeckInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+        if db_field.name == 'event_id':
+            if request._obj_ is not None:
+                field.queryset = field.queryset.filter(event__exact = request._obj_)
+            else:
+                field.queryset = field.queryset.none()
+        return field
 
 admin.site.register(event,eventAdmin)
 admin.site.register(match)
