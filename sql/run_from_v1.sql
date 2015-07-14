@@ -368,11 +368,11 @@ FROM ed
 left join coverage.coverage_player cp
 	on cp.first_name = SUBSTRING_INDEX(ed.playername,' ',1)
 	and cp.last_name = SUBSTRING_INDEX(ed.playername,' ',-1)
-left join events e
+ join events e
 	on ed.eventid = e.id
-left join coverage.coverage_format f
+ join coverage.coverage_format f
 	on f.name = e.formattype
-LEFT JOIN coverage.coverage_event en
+JOIN coverage.coverage_event en
 	ON en.location = SUBSTRING_INDEX(e.location,',',1)
 	AND e.startdate = en.start_date
 ;
