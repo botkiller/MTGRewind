@@ -203,6 +203,13 @@ from dpid base
 join mtgcoverage_archive.Decks d
 	on d.id = base.deckid;
 
+	insert into coverage.coverage_archetype (name)
+	select 'Ghostway'
+	union
+	select 'Formation'
+	union
+	select 'Warriors';
+
 
 
 INSERT INTO coverage.coverage_event_type (name)
@@ -554,9 +561,10 @@ LEFT JOIN Tournament t
 LEFT JOIN coverage.coverage_event e
 	ON e.location = SUBSTRING_INDEX(t.location,',',1)
 	AND t.startdate = e.start_date
+LEFT JOIN Matches m
+	ON m.id = base.matchid
 LEFT JOIN coverage.coverage_format f
-	ON f.id = e.id
-	AND f.name = t.format;
+	ON f.name = m.format;
 
 
 
