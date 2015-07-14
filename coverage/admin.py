@@ -2,10 +2,10 @@ from django.contrib import admin
 from coverage.models import event, match, game, deck, format, organizer, player, format_type, archetype, event_type, color, commentator
 
 # Register your models here.
-class DeckInline(admin.TabularInline):
+class MatchInLine(admin.TabularInline):
     model = deck
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
-        field = super(DeckInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        field = super(MatchInLine, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
         if db_field.name == 'event_id':
             if request._obj_ is not None:
@@ -16,7 +16,7 @@ class DeckInline(admin.TabularInline):
 
 class eventAdmin(admin.ModelAdmin):
     list_display = ['get_event_type', 'location', 'start_date']
-    inlines = (DeckInline,)
+    inlines = (MatchInLine,)
 
     def get_form(self, request, obj=None, **kwargs):
         request._obj_ = obj
