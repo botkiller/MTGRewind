@@ -39,7 +39,7 @@ class deck(models.Model):
     format = models.ForeignKey('coverage.format')
     color = models.ForeignKey('coverage.color', blank=True, null=True)
     def __unicode__(self):
-        return unicode(player.first_name)
+        return unicode(self.player.first_name)
 
 class format(models.Model):
     name = models.CharField(max_length=100)
