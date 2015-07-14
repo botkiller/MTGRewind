@@ -41,7 +41,7 @@ class deck(models.Model):
     format = models.ForeignKey('coverage.format')
     color = models.ForeignKey('coverage.color', blank=True, null=True)
     def __unicode__(self):
-        return unicode(self.event.start_date) + u': ' + unicode(self.event.location) + u' ' + unicode(self.name)
+        return unicode(self.event.start_date) + u': ' + unicode(self.event.location) + u' ' + unicode(self.name) + u' - ' + unicode(self.player.first_name) + u' ' + unicode(self.player.last_name)
 
 class format(models.Model):
     name = models.CharField(max_length=100)
