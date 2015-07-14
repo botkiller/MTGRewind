@@ -3,7 +3,7 @@ from coverage.models import event, match, game, deck, format, organizer, player,
 
 # Register your models here.
 class MatchInLine(admin.TabularInline):
-    model = deck
+    model = event
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         field = super(MatchInLine, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
