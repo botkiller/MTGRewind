@@ -16,7 +16,7 @@ AND t.organiser != 'tcg';
 
 INSERT INTO coverage.coverage_event
 	(event_type_id, start_date, end_date, location, organizer_id, format_id, rounds)
-SELECT
+SELECT DISTINCT
 	CASE
 		WHEN t.Name LIKE '%open%' THEN (SELECT coverage_event_type.id FROM coverage.coverage_event_type WHERE name = 'Star City Games Open Series')
       WHEN t.Name LIKE '%invitational%' THEN (SELECT coverage_event_type.id FROM coverage.coverage_event_type WHERE name = 'Star City Games Invitational')
@@ -100,7 +100,7 @@ DELETE FROM ed WHERE deckname ='';
 
 INSERT INTO coverage.coverage_player
 	(first_name, last_name)
-SELECT
+SELECT DISTINCT
 	SUBSTRING_INDEX(ed.playername,' ',1),
 	SUBSTRING_INDEX(ed.playername,' ',-1)
 FROM ed
@@ -113,7 +113,7 @@ AND cp.id is null
 
 INSERT INTO coverage.coverage_deck
 	(name, archetype_id, player_id, format_id, color_id, event_id)
-SELECT
+SELECT DISTINCT
 	ed.deckname,
 	case
 	  when ed.deckname = 'goryo''s vengeance' then (select id from coverage.coverage_archetype where name = 'reanimator')
@@ -399,7 +399,7 @@ select e.id, ed.roundnumber, max(cd.id) as decka, min(cd.id) as deckb
 
 insert coverage.coverage_match
 	(event_id, vod_url, round_number, top8, first_deck_id, second_deck_id)
-select
+select DISTINCT
 	ce.id,
 	ed.vodurl,
 	CASE WHEN ed.roundnumber NOT IN (98,99,100) THEN ed.roundnumber END AS round_number,
