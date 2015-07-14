@@ -39,7 +39,7 @@ class deck(models.Model):
     format = models.ForeignKey('coverage.format')
     color = models.ForeignKey('coverage.color', blank=True, null=True)
     def __unicode__(self):
-        return self.name
+        return unicode(player.first_name)
 
 class format(models.Model):
     name = models.CharField(max_length=100)
@@ -64,6 +64,8 @@ class player(models.Model):
     grand_prix_wins = models.IntegerField( blank=True, null=True)
     grand_prix_top8s = models.IntegerField( blank=True, null=True)
     world_championships = models.IntegerField( blank=True, null=True)
+    def __unicode__(self):
+        return self.first_name
 
 class format_type(models.Model):
     name = models.CharField(max_length=100)
