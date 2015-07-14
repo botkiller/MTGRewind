@@ -8,7 +8,7 @@ class event(models.Model):
     organizer = models.ForeignKey('coverage.organizer')
     rounds = models.IntegerField()
     format = models.ForeignKey('coverage.format')
-    winning_deck = models.ForeignKey('coverage.deck', blank=True, null=True)
+    winning_deck = models.ForeignKey('coverage.deck', blank=True, null=True, related_name='deck_that_won')
     details_url = models.CharField(max_length=255, blank=True, null=True)
 
 class match(models.Model):
