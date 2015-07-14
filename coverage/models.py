@@ -33,7 +33,7 @@ class game(models.Model):
 
 class deck(models.Model):
     name = models.CharField(max_length=100)
-    #event = models.ForeignKey('coverage.event')
+    event = models.ForeignKey('coverage.event')
     archetype = models.ForeignKey('coverage.archetype')
     player = models.ForeignKey('coverage.player')
     format = models.ForeignKey('coverage.format')
